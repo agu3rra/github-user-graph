@@ -1,8 +1,24 @@
 [package]
-name = "github-users"
+name = "github_user_graph"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+authors = ["Andre Guerra <agu3rra@proton.me>"]
+description = "A simple Rust crate to interact with Github's users API endpoint from Rust."
+repository = "https://github.com/agu3rra/github-user-graph"
+readme = "readme.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+serde = { version="1", features=["derive"] }
+serde_json = { version="1" }
+tokio = { version="1", fetures=["full"] }
+reqwest = { version="0", features=["json"] }
+
+# When building for release...
+[profile.release]
+strip = true  # Strips symbols from the binary to reduce size.
+opt-level = 's'  # Optimize for size as this is not a complex program.
+lto = true  # Enable link time optimization at the expense of longer linking
+codegen-units = 1  # Max size reduction optimizations; longer compile times
